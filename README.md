@@ -37,7 +37,7 @@ export FEE_RECEIPIENT=<Your-ACE-wallet-address>
 ./status.sh
 ```
 
-### Start the Validator
+### Validator (not necessary)
 
 **Generate the secret file using the keystore file:**
 
