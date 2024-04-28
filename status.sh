@@ -4,7 +4,7 @@
 API_URL="http://localhost:8545"
 ETH2_API_URL="http://127.0.0.1:5052/eth/v1/node/syncing"
 
-echo "Fetching the current block number from the Ethereum mainnet..."
+echo "Fetching the current block number from the Endurance mainnet..."
 # Send a JSON-RPC request to get the current block number
 response=$(curl -s -X POST \
   -H "Content-Type: application/json" \
@@ -26,7 +26,7 @@ peer_count=$(curl -s -X POST \
 echo "Response: $peer_count"
 echo "---"
 
-echo "Checking the syncing status of Ethereum 2.0 node..."
+echo "Checking the syncing status of Endurance 2.0 node..."
 # Use a GET request to query the ETH2 node syncing status
 sync_status=$(curl -s --location --request GET "$ETH2_API_URL")
 
