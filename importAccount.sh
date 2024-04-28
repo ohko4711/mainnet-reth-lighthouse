@@ -6,7 +6,5 @@ docker run \
   -v $(pwd)/validator_keys:/validator_keys \
   -v $(pwd)/../network_config:/network_config \
   sigp/lighthouse:v5.1.3 \
-  --testnet-dir=/network_config \
-  account validator import \
-  --directory=/validator_keys
-
+  lighthouse --testnet-dir=/network_config \
+  account validator import --directory=/validator_keys
