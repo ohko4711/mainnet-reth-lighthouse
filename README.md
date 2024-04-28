@@ -19,10 +19,10 @@ cd mainnet-reth-lighthouse
 
 **3. Configure your fee recipient address:**
 
-Replace `<Your-ACE-wallet-address>` with your actual wallet address.
+Replace `<Your-ACE-Wallet-Address>` with your actual wallet address. Like this `export FEE_RECEIPIENT=0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045`.
 
 ```
-export FEE_RECEIPIENT=<Your-ACE-wallet-address>
+export FEE_RECEIPIENT=<Your-ACE-Wallet-Address>
 ```
 
 **4. Start the node:**
