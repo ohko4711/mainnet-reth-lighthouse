@@ -4,7 +4,7 @@ This repository provides a simple way to set up a node on the Endurance Mainnet,
 
 ### Preparation
 
-This repository is based on Docker, so you need to install Docker before using it: https://docs.docker.com/desktop/install/linux-install/
+This repository is based on Docker, so you need to install Docker before using it: [Install Docker Engine](https://docs.docker.com/engine/install/)
 
 ### Installation and Initialization
 
