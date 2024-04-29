@@ -10,6 +10,9 @@ export CL_CHECKPOINT=https://checkpointz.fusionist.io/
 
 echo "Using IP address: $IP_ADDRESS"
 
+FEE_RECEIPIENT=$(cat "$(pwd)/fee_recipient.txt")
+export FEE_RECEIPIENT
+
 
 # Read contents from files and assign to variables
 EL_BOOTNODES=enode://164276f9943a38d527c5e53eb41677397c0abfdb83f4d78bf92aa7e1b2eddb9d6f22016a9ecb4d69bc6df0f67ca1bc57cc70431f188ef630646776bf2452d733@35.208.65.186:30303,enode://630a3bfc641634870db1b10b8a66e37d123eb00e824e616bd85f3ec7394ae7d0a07edd5e73847036e62ecc39691351256cfe89c57a22fedca7241d7942da6fe8@138.201.159.60:30303,enode://fc56df1424e7d50c4b1d8ce45dce1fc34644a0c85b410d5598c6e792480fae9bd6088abbe8d4a4346670613485f6b3353827fc4ec5d0fd0b79b1feb6eca21f68@65.109.226.1:30303,enode://0e354a2ab10edf0c3f632a35c7d2578acf7ec1b8e1583903e883b877ca3b49aa9b4dfde7c564d3ffcdd37176bacc9ce182c4ceb15bbcd15973cffe727a103e41@149.28.221.67:30303

@@ -2,11 +2,13 @@
 
 This repository provides a simple way to set up a node on the Endurance Mainnet, covering the execution layer, consensus layer, and validator node. Execute the following commands on your server to get started.
 
-### Prepare
+### Preparation
 
-This repo is based on Docker, so you need to install Docker before use: https://docs.docker.com/desktop/install/linux-install/
+This repository is based on Docker, so you need to install Docker before using it: https://docs.docker.com/desktop/install/linux-install/
 
-### Usage
+### Installation and Initialization
+
+**Complete the following steps only once to set up your node:**
 
 **1. Clone the repository and navigate into the directory:**
 
@@ -23,28 +25,30 @@ cd mainnet-reth-lighthouse
 
 **3. Configure your fee recipient address:**
 
-Replace `<Your-ACE-Wallet-Address>` with your actual wallet address. Like this `export FEE_RECEIPIENT=0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045`.
+Replace `<Your-ACE-Wallet-Address>` with your actual wallet address.
 
 ```
-export FEE_RECEIPIENT=<Your-ACE-Wallet-Address>
+echo -n '<Your-ACE-Wallet-Address>' > fee_recipient.txt
 ```
 
-**4. Start the node:**
+Example: `echo -n '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' > fee_recipient.txt`
+
+### Node Operations
+
+**Start the node:**
 
 ```
 ./start.sh
 ```
 
-**5. Query the node status:**
+**Stop the node:**
+
+```
+./stop.sh
+```
+
+**Query the node status:**
 
 ```
 ./status.sh
-```
-
-### Validator (not necessary)
-
-**Generate the secret file using the keystore file:**
-
-```
-python lighthouseSecrets.py validator_keys <Password of keystore file>
 ```
