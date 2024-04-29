@@ -2,6 +2,9 @@
 
 This repository provides a simple way to set up a node on the Endurance Mainnet, covering the execution layer, consensus layer, and validator node. Execute the following commands on your server to get started.
 
+> [!IMPORTANT]  
+> This repository outlines steps that are safe for your assets; you don't need to invest or use your assets at this stage. These steps simply start a node that includes functions to manage your investment information should you decide to advance further.
+
 ### Preparation
 
 This repository is based on Docker, so you need to install Docker before using it: [Install Docker Engine](https://docs.docker.com/engine/install/)
