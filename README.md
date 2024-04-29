@@ -2,6 +2,10 @@
 
 This repository provides a simple way to set up a node on the Endurance Mainnet, covering the execution layer, consensus layer, and validator node. Execute the following commands on your server to get started.
 
+### Prepare
+
+This repo is based on Docker, so you need to install Docker before use: https://docs.docker.com/desktop/install/linux-install/
+
 ### Usage
 
 **1. Clone the repository and navigate into the directory:**
@@ -19,10 +23,10 @@ cd mainnet-reth-lighthouse
 
 **3. Configure your fee recipient address:**
 
-Replace `<Your-ACE-wallet-address>` with your actual wallet address.
+Replace `<Your-ACE-Wallet-Address>` with your actual wallet address. Like this `export FEE_RECEIPIENT=0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045`.
 
 ```
-export FEE_RECEIPIENT=<Your-ACE-wallet-address>
+export FEE_RECEIPIENT=<Your-ACE-Wallet-Address>
 ```
 
 **4. Start the node:**
@@ -37,7 +41,7 @@ export FEE_RECEIPIENT=<Your-ACE-wallet-address>
 ./status.sh
 ```
 
-### Start the Validator
+### Validator (not necessary)
 
 **Generate the secret file using the keystore file:**
 
