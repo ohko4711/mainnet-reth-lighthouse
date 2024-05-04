@@ -7,6 +7,14 @@ fi
 
 KEYFILE="$1"
 
+
+export IP_ADDRESS=$(curl -4 ifconfig.io)
+
+if [ -z "$IP_ADDRESS" ]; then
+    echo "Failed to retrieve IP address"
+    exit 1
+fi
+
 docker run \
   --rm \
   -it \
@@ -18,4 +26,4 @@ docker run \
   --testnet-dir=/network_config \
   account validator exit \
   --keystore "/${KEYFILE}" \
-  --beacon-node http://127.0.0.1:5052
+  --beacon-node http://$IP_ADDRESS:5052
