@@ -6,7 +6,7 @@ if [ -z "$IP_ADDRESS" ]; then
     exit 1
 fi
 
-export CL_CHECKPOINT=https://checkpointz.fusionist.io/
+export CL_CHECKPOINT=https://checkpointz.endurancehub.org/
 
 echo "Using IP address: $IP_ADDRESS"
 
