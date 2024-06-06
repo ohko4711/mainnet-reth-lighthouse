@@ -3,6 +3,7 @@ version: "3.8"
 services:
   execution:
     image: ghcr.io/paradigmxyz/reth:latest
+    pull_policy: always
     command:
       - node
       - -vvv
@@ -35,14 +36,15 @@ services:
       - ./execution-data:/execution-data
       - ../network_config:/network_config
     ports:
-      - "8545:8545" 
-      - "8546:8546" 
-      - "9001:9001" 
+      - "127.0.0.1:8545:8545" 
+      - "127.0.0.1:8546:8546" 
+      - "127.0.0.1:9001:9001" 
       - "30303:30303"
     restart: unless-stopped
 
   beacon:
     image: sigp/lighthouse:latest
+    pull_policy: always
     command:
       - lighthouse
       - beacon_node
@@ -77,14 +79,15 @@ services:
       - "9000:9000/tcp"
       - "9000:9000/udp"
       - "9001:9001/udp"
-      - "5052:5052"
-      - "5054:5054"
+      - "127.0.0.1:5052:5052"
+      - "127.0.0.1:5054:5054"
     depends_on:
       - execution
     restart: unless-stopped
 
   validator:
     image: sigp/lighthouse:latest
+    pull_policy: always
     command:
       - lighthouse
       - validator_client
@@ -109,8 +112,8 @@ services:
       - ./validator_keys_secrets:/validator_keys_secrets
       - ../network_config:/network_config
     ports:
-      - "5062:5062"
-      - "5064:5064"
+      - "127.0.0.1:5062:5062"
+      - "127.0.0.1:5064:5064"
     depends_on:
       - beacon
     restart: unless-stopped
