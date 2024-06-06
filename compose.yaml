@@ -41,6 +41,8 @@ services:
       - "127.0.0.1:9001:9001" 
       - "30303:30303"
     restart: unless-stopped
+    stop_signal: SIGINT
+    stop_grace_period: 1m
 
   beacon:
     image: sigp/lighthouse:latest
@@ -84,6 +86,8 @@ services:
     depends_on:
       - execution
     restart: unless-stopped
+    stop_signal: SIGINT
+    stop_grace_period: 1m
 
   validator:
     image: sigp/lighthouse:latest
@@ -117,3 +121,5 @@ services:
     depends_on:
       - beacon
     restart: unless-stopped
+    stop_signal: SIGINT
+    stop_grace_period: 1m
