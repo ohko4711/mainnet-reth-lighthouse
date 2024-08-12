@@ -16,7 +16,7 @@ This repository is based on Docker, so you need to install Docker before using i
 **1. Clone the repository and navigate into the directory:**
 
 ```
-git clone https://github.com/lyfsn/mainnet-reth-lighthouse
+git clone https://github.com/OpenFusionist/mainnet-reth-lighthouse
 cd mainnet-reth-lighthouse
 ```
 
