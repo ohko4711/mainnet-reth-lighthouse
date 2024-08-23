@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   execution:
-    image: ghcr.io/paradigmxyz/reth:latest
+    image: ghcr.io/paradigmxyz/reth:v1.0.3
     pull_policy: always
     command:
       - node
