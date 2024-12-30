@@ -60,7 +60,6 @@ services:
       - --http
       - --http-address=0.0.0.0
       - --http-port=5052
-      - --http-allow-sync-stalled
       - --execution-endpoints=http://execution:8551
       - --jwt-secrets=/jwtsecret
       - --suggested-fee-recipient=${FEE_RECEIPIENT}
