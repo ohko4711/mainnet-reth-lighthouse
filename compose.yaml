@@ -43,7 +43,7 @@ services:
     stop_grace_period: 1m
 
   beacon:
-    image: sigp/lighthouse:latest
+    image: sigp/lighthouse:v6.0.1
     pull_policy: always
     command:
       - lighthouse
@@ -87,7 +87,7 @@ services:
     stop_grace_period: 1m
 
   validator:
-    image: sigp/lighthouse:latest
+    image: sigp/lighthouse:v6.0.1
     pull_policy: always
     command:
       - lighthouse
