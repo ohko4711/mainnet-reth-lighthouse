@@ -1,4 +1,3 @@
-
 export IP_ADDRESS=$(curl -4 ifconfig.io)
 
 if [ -z "$IP_ADDRESS" ]; then
@@ -26,6 +25,13 @@ export CL_TRUSTPEERS
 export CL_BOOTNODES
 export CL_STATICPEERS
 
-docker compose -f compose.yaml up -d
+# Check if MEV version is requested
+COMPOSE_FILE="compose.yaml"
+if [ "$1" = "mev" ]; then
+    COMPOSE_FILE="compose-mev-version.yaml"
+    echo "Starting MEV version..."
+else
+    echo "Starting default version..."
+fi
 
-
+docker compose -f $COMPOSE_FILE up -d

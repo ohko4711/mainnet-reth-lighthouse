@@ -1,0 +1,135 @@
+services:
+  boost:
+    image: ohko4711/mev-boost
+    command: >
+      -addr 0.0.0.0:18550
+      -genesis-fork-version 0x10000001
+      -genesis-timestamp 1709532000
+      -relay-check
+      -relay http://0xb1237e4b469262f305cb7607b74264f602c0f30f9405e63ce0283e83c240f4699981e01ba3fe40c5261b581fe1fdd0dd@relay-eur.endurancehub.org
+      -relay http://0x8aaa802de39ce9ab3f0fe937681bff1ec325894a5471ead6dd91c2e7465cf26a3a9cd24478837fe24fac957e014aa3bb@relay-us.endurancehub.org
+    ports:
+      - "18550:18550"
+  execution:
+    image: ghcr.io/paradigmxyz/reth:v1.0.3
+    pull_policy: always
+    command:
+      - node
+      - -vvv
+      - --full
+      - --datadir=/execution-data
+      - --chain=/network_config/genesis.json
+      - --addr=0.0.0.0
+      - --port=30303
+      - --discovery.port=30303
+      - --discovery.addr=0.0.0.0
+      - --http
+      - --http.port=8545
+      - --http.addr=0.0.0.0
+      - --http.corsdomain=*
+      - --http.api=net,eth,web3,txpool
+      - --ws
+      - --ws.addr=0.0.0.0
+      - --ws.port=8546
+      - --ws.api=net,eth
+      - --ws.origins=*
+      - --nat=extip:${IP_ADDRESS}
+      - --authrpc.port=8551
+      - --authrpc.jwtsecret=/jwtsecret
+      - --authrpc.addr=0.0.0.0
+      - --metrics=0.0.0.0:9001
+      - --bootnodes=${EL_BOOTNODES}
+      - --trusted-peers=${EL_BOOTNODES}
+    volumes:
+      - ./jwtsecret:/jwtsecret
+      - ./execution-data:/execution-data
+      - ../network_config:/network_config
+    ports:
+      - "127.0.0.1:8545:8545" 
+      - "127.0.0.1:8546:8546" 
+      - "127.0.0.1:9001:9001" 
+      - "30303:30303"
+    restart: unless-stopped
+    stop_signal: SIGINT
+    stop_grace_period: 1m
+
+  beacon:
+    image: sigp/lighthouse:v6.0.1
+    pull_policy: always
+    command:
+      - lighthouse
+      - beacon_node
+      - --debug-level=info
+      - --datadir=/consensus-data
+      - --testnet-dir=/network_config
+      - --enr-address=${IP_ADDRESS}
+      - --enr-udp-port=9000
+      - --enr-tcp-port=9000
+      - --enr-quic-port=9001
+      - --listen-address=0.0.0.0
+      - --port=9000
+      - --http
+      - --http-address=0.0.0.0
+      - --http-port=5052
+      - --execution-endpoints=http://execution:8551
+      - --jwt-secrets=/jwtsecret
+      - --suggested-fee-recipient=${FEE_RECEIPIENT}
+      - --metrics
+      - --metrics-address=0.0.0.0
+      - --metrics-allow-origin=*
+      - --metrics-port=5054
+      - --trusted-peers=${CL_TRUSTPEERS}
+      - --boot-nodes=${CL_BOOTNODES}
+      - --checkpoint-sync-url=${CL_CHECKPOINT}
+      - --builder=http://boost:18550
+    volumes:
+      - ./consensus-data:/consensus-data 
+      - ./jwtsecret:/jwtsecret
+      - ../network_config:/network_config
+    ports:
+      - "9000:9000/tcp"
+      - "9000:9000/udp"
+      - "9001:9001/udp"
+      - "127.0.0.1:5052:5052"
+      - "127.0.0.1:5054:5054"
+    depends_on:
+      - execution
+    restart: unless-stopped
+    stop_signal: SIGINT
+    stop_grace_period: 1m
+
+  validator:
+    image: sigp/lighthouse:v6.0.1
+    pull_policy: always
+    command:
+      - lighthouse
+      - validator_client
+      - --debug-level=info
+      - --testnet-dir=/network_config
+      - --validators-dir=/validator_keys
+      - --secrets-dir=/validator_keys_secrets
+      - --http
+      - --http-address=0.0.0.0
+      - --http-port=5062
+      - --unencrypted-http-transport
+      - --init-slashing-protection
+      - --beacon-nodes=http://beacon:5052
+      - --suggested-fee-recipient=${FEE_RECEIPIENT}
+      - --metrics
+      - --metrics-address=0.0.0.0
+      - --metrics-allow-origin=*
+      - --metrics-port=5064
+      - --graffiti=ACE-TO-MOON
+      - --builder-proposals
+    volumes:
+      - ./validator_keys:/validator_keys
+      - ./validator_keys_secrets:/validator_keys_secrets
+      - ../network_config:/network_config
+    ports:
+      - "127.0.0.1:5062:5062"
+      - "127.0.0.1:5064:5064"
+    depends_on:
+      - beacon
+    restart: unless-stopped
+    stop_signal: SIGINT
+    stop_grace_period: 1m

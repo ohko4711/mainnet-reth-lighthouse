@@ -40,14 +40,28 @@ Example: `echo -n '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045' > fee_recipient.t
 
 **Start the node:**
 
+For default version:
 ```
 ./start.sh
 ```
 
-**Stop the node:**
+If you want to run node with mev-boost to capture mev rewards:
 
 ```
+./start.sh mev
+```
+
+**Stop the node:**
+
+For default version:
+```
 ./stop.sh
+```
+
+If you want to run node with mev-boost to capture mev rewards:
+
+```
+./stop.sh mev
 ```
 
 **Query the node status:**
