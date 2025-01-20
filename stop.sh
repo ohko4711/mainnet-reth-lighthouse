@@ -8,6 +8,7 @@ export CL_TRUSTPEERS=${CL_TRUSTPEERS:-""}
 export CL_BOOTNODES=${CL_BOOTNODES:-""}
 export CL_STATICPEERS=${CL_STATICPEERS:-""}
 export CL_CHECKPOINT=${CL_CHECKPOINT:-""}
+export COMPOSE_FILE="compose.yaml"
 # ========================================
 # Get the directory where the script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
@@ -16,8 +17,10 @@ PROJECT_NAME="$(basename "${SCRIPT_DIR}")"
 # Check if MEV boost service exists
 if docker ps | grep "${PROJECT_NAME}-boost-1"; then
     echo "Stopping MEV version..."
-    docker compose -f "${SCRIPT_DIR}/compose-mev-version.yaml" stop
+    export COMPOSE_FILE="mev-boost.yaml:compose.yaml"
 else
-    echo "Stopping default version..."
-    docker compose -f "${SCRIPT_DIR}/compose.yaml" stop
+    echo "Stopping default version..."    
 fi
+
+cd "${SCRIPT_DIR}"
+docker compose stop

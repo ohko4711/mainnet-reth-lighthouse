@@ -26,12 +26,14 @@ export CL_BOOTNODES
 export CL_STATICPEERS
 
 # Check if MEV version is requested
-COMPOSE_FILE="compose.yaml"
+export COMPOSE_FILE="compose.yaml"
 if [ "$1" = "mev" ]; then
-    COMPOSE_FILE="compose-mev-version.yaml"
-    echo "Starting MEV version..."
+    export COMPOSE_FILE="mev-boost.yaml:compose.yaml"
+    export BUILDER_FLAG="--builder=http://boost:18550"
+    export BUILDER_PROPOSALS="--builder-proposals"
+    echo "Starting with MEV-boost..."
 else
     echo "Starting default version..."
 fi
 
-docker compose -f $COMPOSE_FILE up -d
+docker compose up -d

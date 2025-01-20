@@ -45,31 +45,31 @@ services:
   beacon:
     image: sigp/lighthouse:v6.0.1
     pull_policy: always
-    command:
-      - lighthouse
-      - beacon_node
-      - --debug-level=info
-      - --datadir=/consensus-data
-      - --testnet-dir=/network_config
-      - --enr-address=${IP_ADDRESS}
-      - --enr-udp-port=9000
-      - --enr-tcp-port=9000
-      - --enr-quic-port=9001
-      - --listen-address=0.0.0.0
-      - --port=9000
-      - --http
-      - --http-address=0.0.0.0
-      - --http-port=5052
-      - --execution-endpoints=http://execution:8551
-      - --jwt-secrets=/jwtsecret
-      - --suggested-fee-recipient=${FEE_RECEIPIENT}
-      - --metrics
-      - --metrics-address=0.0.0.0
-      - --metrics-allow-origin=*
-      - --metrics-port=5054
-      - --trusted-peers=${CL_TRUSTPEERS}
-      - --boot-nodes=${CL_BOOTNODES}
-      - --checkpoint-sync-url=${CL_CHECKPOINT}
+    entrypoint: >
+      lighthouse beacon_node
+      --debug-level=info
+      --datadir=/consensus-data
+      --testnet-dir=/network_config
+      --enr-address=${IP_ADDRESS}
+      --enr-udp-port=9000
+      --enr-tcp-port=9000
+      --enr-quic-port=9001
+      --listen-address=0.0.0.0
+      --port=9000
+      --http
+      --http-address=0.0.0.0
+      --http-port=5052
+      --execution-endpoints=http://execution:8551
+      --jwt-secrets=/jwtsecret
+      --suggested-fee-recipient=${FEE_RECEIPIENT}
+      --metrics
+      --metrics-address=0.0.0.0
+      --metrics-allow-origin=*
+      --metrics-port=5054
+      --trusted-peers=${CL_TRUSTPEERS}
+      --boot-nodes=${CL_BOOTNODES}
+      --checkpoint-sync-url=${CL_CHECKPOINT}
+      ${BUILDER_FLAG}
     volumes:
       - ./consensus-data:/consensus-data 
       - ./jwtsecret:/jwtsecret
@@ -89,25 +89,25 @@ services:
   validator:
     image: sigp/lighthouse:v6.0.1
     pull_policy: always
-    command:
-      - lighthouse
-      - validator_client
-      - --debug-level=info
-      - --testnet-dir=/network_config
-      - --validators-dir=/validator_keys
-      - --secrets-dir=/validator_keys_secrets
-      - --http
-      - --http-address=0.0.0.0
-      - --http-port=5062
-      - --unencrypted-http-transport
-      - --init-slashing-protection
-      - --beacon-nodes=http://beacon:5052
-      - --suggested-fee-recipient=${FEE_RECEIPIENT}
-      - --metrics
-      - --metrics-address=0.0.0.0
-      - --metrics-allow-origin=*
-      - --metrics-port=5064
-      - --graffiti=ACE-TO-MOON
+    entrypoint: >
+      lighthouse validator_client
+      --debug-level=info
+      --testnet-dir=/network_config
+      --validators-dir=/validator_keys
+      --secrets-dir=/validator_keys_secrets
+      --http
+      --http-address=0.0.0.0
+      --http-port=5062
+      --unencrypted-http-transport
+      --init-slashing-protection
+      --beacon-nodes=http://beacon:5052
+      --suggested-fee-recipient=${FEE_RECEIPIENT}
+      --metrics
+      --metrics-address=0.0.0.0
+      --metrics-allow-origin=*
+      --metrics-port=5064
+      --graffiti=ACE-TO-MOON
+      ${BUILDER_PROPOSALS}
     volumes:
       - ./validator_keys:/validator_keys
       - ./validator_keys_secrets:/validator_keys_secrets
