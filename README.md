@@ -53,15 +53,8 @@ If you want to run node with mev-boost to capture mev rewards:
 
 **Stop the node:**
 
-For default version:
 ```
 ./stop.sh
-```
-
-If you want to run node with mev-boost to capture mev rewards:
-
-```
-./stop.sh mev
 ```
 
 **Query the node status:**

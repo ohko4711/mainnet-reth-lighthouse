@@ -1,10 +1,8 @@
-# Check if MEV version is requested
-COMPOSE_FILE="compose.yaml"
-if [ "$1" = "mev" ]; then
-    COMPOSE_FILE="compose-mev-version.yaml"
+# Check if MEV version is running
+if docker compose -f compose-mev-version.yaml ps | grep -q "Up"; then
     echo "Stopping MEV version..."
+    docker compose -f compose-mev-version.yaml stop
 else
     echo "Stopping default version..."
+    docker compose -f compose.yaml stop
 fi
-
-docker compose -f $COMPOSE_FILE stop
