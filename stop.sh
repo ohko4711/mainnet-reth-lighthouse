@@ -27,7 +27,7 @@ export EL_BOOTNODES
 export CL_TRUSTPEERS
 export CL_BOOTNODES
 export CL_STATICPEERS
-
+# ========================================
 # Get the directory where the script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 PROJECT_NAME="$(basename "${SCRIPT_DIR}")"

@@ -10,6 +10,9 @@ services:
       -relay http://0x8aaa802de39ce9ab3f0fe937681bff1ec325894a5471ead6dd91c2e7465cf26a3a9cd24478837fe24fac957e014aa3bb@relay-us.endurancehub.org
     ports:
       - "18550:18550"
+    restart: unless-stopped
+    stop_signal: SIGINT
+    stop_grace_period: 1m
   execution:
     image: ghcr.io/paradigmxyz/reth:v1.0.3
     pull_policy: always
