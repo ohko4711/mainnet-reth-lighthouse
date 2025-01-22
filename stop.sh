@@ -8,6 +8,8 @@ export CL_TRUSTPEERS=${CL_TRUSTPEERS:-""}
 export CL_BOOTNODES=${CL_BOOTNODES:-""}
 export CL_STATICPEERS=${CL_STATICPEERS:-""}
 export CL_CHECKPOINT=${CL_CHECKPOINT:-""}
+export BUILDER_FLAG=${BUILDER_FLAG:-""}
+export BUILDER_PROPOSALS=${BUILDER_PROPOSALS:-""}
 export COMPOSE_FILE="compose.yaml"
 # ========================================
 # Get the directory where the script is located
